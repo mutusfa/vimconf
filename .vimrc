@@ -54,8 +54,10 @@ set ruler	" Show row and column ruler information
  
 set undolevels=1000	" Number of undo levels
 set backspace=indent,eol,start	" Backspace behaviour
+set tabstop=4
 set shiftwidth=4  " indent by 4 spaces by default
 set expandtab  " only Makefiles need tabs
+set list listchars=tab:»·,trail:·  " Show hidden whitespace
 
 " vim-clang-format options
 let g:clang_format#auto_format=1  " format on writing
