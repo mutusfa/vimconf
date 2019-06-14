@@ -9,6 +9,7 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+Plugin 'altercation/vim-colors-solarized'  " an eye-friendly colorscheme
 Plugin 'rhysd/vim-clang-format'  " automatic formatter for clangs
 Plugin 'scrooloose/nerdcommenter'  " Commenting plugin
 Plugin 'tell-k/vim-autopep8'  " Automatically conform to PEP8 style guide (Python)
@@ -88,7 +89,7 @@ function! FillLine( str )
     endif
 endfunction
 
-" Manual shortcuts
+" Manual shortcuts 
 let mapleader = ","
 nnoremap <silent> <leader><space> :nohlsearch<Enter>
  
