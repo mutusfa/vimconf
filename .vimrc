@@ -12,10 +12,13 @@ call vundle#begin()
 Plugin 'altercation/vim-colors-solarized'  " an eye-friendly colorscheme
 Plugin 'rhysd/vim-clang-format'  " automatic formatter for clangs
 Plugin 'scrooloose/nerdcommenter'  " Commenting plugin
+Plugin 'scrooloose/nerdtree'  " File system explorer
+Plugin 'sjl/gundo.vim'  " Undo visualization
 Plugin 'tell-k/vim-autopep8'  " Automatically conform to PEP8 style guide (Python)
 Plugin 'tpope/vim-fugitive'  "  git wrapper
 Plugin 'Valloric/YouCompleteMe'  " Autocompleter
 Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle
+Plugin 'w0rp/ale'  " async linters
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,27 +40,31 @@ set number	" Show line numbers
 set showbreak=+++ 	" Wrap-broken line prefix
 set showmatch	" Highlight matching brace
 set visualbell	" Use visual bell (no beeping)
- 
+
 set hlsearch	" Highlight all search results
 set smartcase	" Enable smart-case search
 "set ignorecase	" Always case-insensitive
 set incsearch	" Searches for strings incrementally
- 
+
 set autoindent	" Auto-indent new lines
 set smartindent	" Enable smart-indent
 set smarttab	" Enable smart-tabs
- 
+
+syntax enable  " Enable syntax highlighting
+
 " Advanced
 set confirm	" Prompt confirmation dialogs
 set hidden      " Don't write file on buffer change
 set ruler	" Show row and column ruler information
- 
+set colorcolumn=+1  " Highlight a column after textwidth columns
+
 set undolevels=1000	" Number of undo levels
 set backspace=indent,eol,start	" Backspace behaviour
 set tabstop=4
 set shiftwidth=4  " indent by 4 spaces by default
-set expandtab  " only Makefiles need tabs
+set expandtab  " convert tab to spaces
 set list listchars=tab:»·,trail:·  " Show hidden whitespace
+set autochdir  " Automatically change working dir to current file's
 
 " vim-clang-format options
 let g:clang_format#auto_format=1  " format on writing
@@ -69,9 +76,12 @@ let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
 
-" autopep8 options
-let g:autopep8_disable_show_diff = 1
-let g:autopep8_on_save = 1
+" NerdTree
+let NERDTreeMapActivateNode='l'
+let NERDTreeMapCloseDir='h'
+
+" YouCompleteMe/ycm
+let g:ycm_confirm_extra_conf = 0  " automatically open any project-specific conf
 
 " Manual functions
 " fill rest of line with characters
@@ -91,10 +101,15 @@ function! FillLine( str )
     endif
 endfunction
 
-" Manual shortcuts 
-let mapleader = ","
+" Manual shortcuts
+let mapleader = ";"
 nnoremap <silent> <leader><space> :nohlsearch<Enter>
- 
+nnoremap <silent> <leader>x :bd<Enter>
+
+" Change vim config quicker
+nnoremap <leader>ev :split ~/.vimrc<Enter>
+nnoremap <leader>so :source ~/.vimrc<Enter>
+
 " Allow for nice separation via comment lines
 inoremap <leader>== <Esc>:call FillLine('=')<Enter>
 nnoremap <leader>== <Esc>:call FillLine('=')<Enter>
@@ -119,3 +134,9 @@ onoremap <silent> 0 g0
 inoremap <silent> jk <Esc>
 onoremap <silent> jk <Esc>
 cnoremap jk <C-C>
+
+" NERDTree shortcuts
+nnoremap <silent> <leader>t :NERDTreeVCS<Enter>
+
+" Gundo shortcuts
+nnoremap <silent> <leader>u :GundoToggle<CR>
